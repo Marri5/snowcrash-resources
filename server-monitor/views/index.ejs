@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Server Monitor Dashboard</title>
+  <link rel="stylesheet" href="/css/style.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="/socket.io/socket.io.js"></script>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Server Monitor Dashboard</h1>
+      <div class="server-info">
+        <span>Server: <%= serverIp %></span>
+        <span id="connection-status" class="status-connecting">Connecting...</span>
+      </div>
+    </header>
+
+    <div class="dashboard">
+      <div class="metrics-grid">
+        <!-- CPU Usage Card -->
+        <div class="metric-card">
+          <h2>CPU Usage</h2>
+          <div class="gauge-container">
+            <canvas id="cpu-gauge"></canvas>
+            <div class="gauge-value" id="cpu-value">0%</div>
+          </div>
+        </div>
+
+        <!-- Memory Usage Card -->
+        <div class="metric-card">
+          <h2>Memory Usage</h2>
+          <div class="gauge-container">
+            <canvas id="memory-gauge"></canvas>
+            <div class="gauge-value" id="memory-value">0%</div>
+          </div>
+        </div>
+
+        <!-- Disk Usage Card -->
+        <div class="metric-card">
+          <h2>Disk Usage</h2>
+          <div class="gauge-container">
+            <canvas id="disk-gauge"></canvas>
+            <div class="gauge-value" id="disk-value">0%</div>
+          </div>
+        </div>
+
+        <!-- System Uptime Card -->
+        <div class="metric-card">
+          <h2>System Uptime</h2>
+          <div class="info-box" id="uptime-value">
+            Unknown
+          </div>
+        </div>
+
+        <!-- Load Average Card -->
+        <div class="metric-card">
+          <h2>Load Average</h2>
+          <div class="info-box">
+            <div class="load-grid">
+              <div class="load-item">
+                <span class="load-label">1 min:</span>
+                <span id="load-1">0.00</span>
+              </div>
+              <div class="load-item">
+                <span class="load-label">5 min:</span>
+                <span id="load-5">0.00</span>
+              </div>
+              <div class="load-item">
+                <span class="load-label">15 min:</span>
+                <span id="load-15">0.00</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- History Chart Card -->
+        <div class="metric-card full-width">
+          <h2>Resource History</h2>
+          <div class="chart-container">
+            <canvas id="history-chart"></canvas>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <footer>
+      <p>Last updated: <span id="last-update">Never</span></p>
+    </footer>
+  </div>
+
+  <script src="/js/dashboard.js"></script>
+</body>
+</html> 
